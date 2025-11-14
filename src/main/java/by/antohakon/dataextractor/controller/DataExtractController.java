@@ -4,13 +4,14 @@ import by.antohakon.dataextractor.dto.DataResponseDto;
 import by.antohakon.dataextractor.dto.ExtractDataDto;
 import by.antohakon.dataextractor.service.DataExtractService;
 import by.antohakon.dataextractor.service.DataExtractServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
+@Tag(name = "Welcome to Extract data from file")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/dataExtract")
