@@ -4,9 +4,12 @@ import by.antohakon.dataextractor.dto.DataResponseDto;
 import by.antohakon.dataextractor.dto.ExtractDataDto;
 import by.antohakon.dataextractor.service.DataExtractService;
 import by.antohakon.dataextractor.service.DataExtractServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +20,7 @@ public class DataExtractController {
 
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @PostMapping
-    public DataResponseDto searchNumber(@RequestBody ExtractDataDto extractDataDto){
+    public DataResponseDto searchNumber(@RequestBody @Valid ExtractDataDto extractDataDto){
         return dataExtractService.extractData(extractDataDto);
     }
 
