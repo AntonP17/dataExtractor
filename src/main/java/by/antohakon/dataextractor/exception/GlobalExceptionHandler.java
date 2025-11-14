@@ -35,7 +35,17 @@ public class GlobalExceptionHandler {
                         exc.getMessage(),
                         exc.getClass().getSimpleName()
                 ));
+    }
 
+    @ExceptionHandler(BadPositionException.class)
+    public ResponseEntity<ErrorResponse> handleBadPosition(BadPositionException exc) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(
+                        exc.getMessage(),
+                        exc.getClass().getSimpleName()
+                ));
     }
 
     @ExceptionHandler(Exception.class)

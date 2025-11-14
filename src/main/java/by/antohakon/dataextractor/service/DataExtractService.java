@@ -8,9 +8,7 @@ import java.io.FileNotFoundException;
 public interface DataExtractService {
 
       DataResponseDto extractData(ExtractDataDto extractDataDto);
-      boolean fileExists(String path);
-      int[] extractDataFromFile(ExtractDataDto extractDataDto) throws FileNotFoundException;
       int[] sortArray(int[] array);
-      DataResponseDto findNumber(int numberPosition);
+      DataResponseDto findNumber(int[] sortesArray, int numberPosition);
 
 }
