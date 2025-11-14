@@ -8,6 +8,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -24,7 +26,9 @@ public class DataExtractServiceImpl implements DataExtractService {
         int[] numbersFromFile = xslxExtract.extractDataFromFile(extractDataDto);
         int[] sortedNumbers = sortArray(numbersFromFile);
 
-        DataResponseDto dataResponseDto = findNumber(sortedNumbers, extractDataDto.numberPosition());
+        DataResponseDto dataResponseDto = findNumber(
+                sortedNumbers,
+                extractDataDto.numberPosition());
 
         return dataResponseDto;
 
@@ -35,10 +39,8 @@ public class DataExtractServiceImpl implements DataExtractService {
         log.info("method sortArray begin");
 
         mergeSortService.mergeSort(array,0, array.length - 1);
-        for (int number : array) {
-            System.out.println(number + " ");
-        }
 
+        log.info("sortArray = " + Arrays.toString(array));
         return array;
     }
 
