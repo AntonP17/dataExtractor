@@ -13,7 +13,7 @@
 2. Используйте Postman:
 
 **Настройки запроса:**
-- **URL:** `http://localhost:8080/extract`
+- **URL:** `http://localhost:8080/api/dataExtract`
 - **Метод:** POST
 - **Тело запроса (JSON):**
 
@@ -45,7 +45,7 @@ volumes:
 docker compose -f docker-compose-deploy.yaml up -d
 ```
 **Настройки запроса:**
-- **URL:** `http://localhost:8080/extract`
+- **URL:** `http://localhost:8080/api/dataExtract`
 - **Метод:** POST
 - **Тело запроса (JSON):**
 
