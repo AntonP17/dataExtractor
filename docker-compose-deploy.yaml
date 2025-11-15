@@ -1,0 +1,8 @@
+services:
+  data-extractor-service:
+    container_name: data-extractor
+    image: antonp17/data-extractor:1.0.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - C:/Users/pokro/OneDrive/Desktop:/app/data
