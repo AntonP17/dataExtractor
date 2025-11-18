@@ -9,6 +9,6 @@ public interface DataExtractService {
 
       DataResponseDto extractData(ExtractDataDto extractDataDto);
       int[] sortArray(int[] array);
-      DataResponseDto findNumber(int[] sortesArray, int numberPosition);
+      DataResponseDto findNumber(int[] array, int numberPosition);
 
 }

@@ -17,6 +17,7 @@ public class DataExtractServiceImpl implements DataExtractService {
 
     private final XslxExtract xslxExtract;
     private final MergeSortService mergeSortService;
+    private final QuickSelectService quickSelectService;
 
     @Override
     public DataResponseDto extractData(ExtractDataDto extractDataDto) {
@@ -24,13 +25,8 @@ public class DataExtractServiceImpl implements DataExtractService {
         log.info("Extracting data... method extractData begin");
 
         int[] numbersFromFile = xslxExtract.extractDataFromFile(extractDataDto);
-        int[] sortedNumbers = sortArray(numbersFromFile);
 
-        DataResponseDto dataResponseDto = findNumber(
-                sortedNumbers,
-                extractDataDto.numberPosition());
-
-        return dataResponseDto;
+        return findNumber(numbersFromFile, extractDataDto.numberPosition());
 
     }
 
@@ -38,7 +34,7 @@ public class DataExtractServiceImpl implements DataExtractService {
     public int[] sortArray(int[] array) {
         log.info("method sortArray begin");
 
-        mergeSortService.mergeSort(array,0, array.length - 1);
+        mergeSortService.mergeSort(array, 0, array.length - 1);
 
         log.info("sortArray = " + Arrays.toString(array));
         return array;
@@ -47,24 +43,23 @@ public class DataExtractServiceImpl implements DataExtractService {
 
     @Override
     @SneakyThrows
-    public DataResponseDto findNumber(int[] sortedArray, int position) {
+    public DataResponseDto findNumber(int[] array, int numberPosition) {
 
         log.info("method findNumber begin");
 
-        if (position < 1 || position > sortedArray.length) {
-            log.error("Недопустимая позиция. Позиция должна быть от 1 до " + sortedArray.length);
-            throw new BadPositionException("Недопустимая позиция. Позиция должна быть от 1 до " + sortedArray.length);
-        }
+        int nthElement = quickSelectService.kthSmallest(
+                array,
+                0,
+                array.length - 1,
+                numberPosition);
 
-        int findMinNumber = sortedArray[position - 1];
-        log.warn("N-ое минимальное число: " + findMinNumber);
+        log.info("nthElement = " + nthElement);
 
         DataResponseDto dataResponseDto = DataResponseDto.builder()
-                .findNumber(findMinNumber)
                 .text("найденное число по запросу")
+                .findNumber(nthElement)
                 .build();
 
-        log.info("return dto = " + dataResponseDto);
         return dataResponseDto;
     }
 }
